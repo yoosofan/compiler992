@@ -1,6 +1,8 @@
 
 enum tokenType{ LT, NEQ, LE, GT, ID};
 string keywords[] = {"if", "while", "int" }
+tokenType keywords_type[] = {IF, WHILE, INT}
+
 struct Token {
   tokenType t
   double d = 0;
@@ -49,6 +51,11 @@ class lexical{
             t.t = ID;
             t.p = new char[index - begin + 1];
             strncpy(t.p, buf+start);
+            for(int i=0; i < MAX_NUMBER_OF_KEYWORD;  i++)
+              if(t.p == keywords[i]){
+                t.t = keywords_type[i];
+                break;
+              }
             index --;
             flag = false;
           break;
