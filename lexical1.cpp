@@ -1,6 +1,6 @@
 
 enum tokenType{ LT, NEQ, LE, GT, ID};
-string keywords[] = {"IF", "while", "int" }
+string keywords[] = {"if", "while", "int" }
 struct Token {
   tokenType t
   double d = 0;
@@ -33,8 +33,8 @@ class lexical{
       
       break;
       
-      
       default:
+        int begin = index;
         while(flag){
           switch (state){
            case 0:
@@ -47,7 +47,7 @@ class lexical{
           break;
           case 62:
             t.t = ID;
-            t.p = new char[100];
+            t.p = new char[index - begin + 1];
             strncpy(t.p, buf+start);
             index --;
             flag = false;
